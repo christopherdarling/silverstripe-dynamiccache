@@ -6,7 +6,7 @@
  * @author Damian Mooyman
  * @package dynamiccache
  */
-class DynamicCache extends Object
+class DynamicCache extends SS_Object
 {
 
     /**
@@ -111,7 +111,7 @@ class DynamicCache extends Object
                 return false;
             }
 
-            // NOTE(Jake): Required so MemberAuthenticator::record_login_attempt() can call 
+            // NOTE(Jake): Required so MemberAuthenticator::record_login_attempt() can call
             //             Controller::curr()->getRequest()->getIP()
             $stubController = new Controller;
             $stubController->pushCurrent();
@@ -285,7 +285,7 @@ class DynamicCache extends Object
             return false;
         }
         $deserialisedValue = unserialize($cachedValue);
-        
+
         // Set response code
         http_response_code($deserialisedValue['response_code']);
 
@@ -302,7 +302,7 @@ class DynamicCache extends Object
                 SS_Log::log("DynamicCache hit", SS_Log::INFO);
             }
         }
-        
+
         // Substitute security id in forms
         $securityID = SecurityToken::getSecurityID();
         $outputBody = preg_replace(
@@ -441,7 +441,7 @@ class DynamicCache extends Object
         if (empty($result) && empty($locationHeaderMatches)) {
             return;
         }
-        
+
         // Skip excluded status codes
         $optInResponseCodes = self::config()->optInResponseCodes;
         $optOutResponseCodes = self::config()->optOutResponseCodes;
